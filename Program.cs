@@ -15,13 +15,18 @@ namespace Homework16T2
             System.IO.StreamReader f = new StreamReader(@"C:\Users\andrey\Serialize.json");
             string jsonproduct = f.ReadToEnd();
 
+
+            Product[] products = JsonSerializer.Deserialize<Product[]>(jsonproduct);
             
-            Product product = JsonSerializer.Deserialize<Product>(jsonproduct);
+            
+            double maxprice = 0;
+           
+            foreach (var product in products)
+            {
+                maxprice =  product.Price > maxprice ? product.Price : maxprice;
+            }
 
-
-
-
-            Console.WriteLine(jsonproduct);
+            Console.WriteLine(maxprice);
             Console.ReadKey();
         }
     }
